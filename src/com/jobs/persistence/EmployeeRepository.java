@@ -13,12 +13,12 @@ public class EmployeeRepository {
 		
 	}
 	
-	public static List<AbsStaffMember> getAllMembers(){
+	public List<AbsStaffMember> getAllMembers(){
 		return new ArrayList<AbsStaffMember>(members);
 	}
 	
 	
-	public static void addMember(AbsStaffMember member) throws Exception{
+	public void addMember(AbsStaffMember member) throws Exception{
 		if(member==null) throw new Exception();
 		members.add(member);
 	}

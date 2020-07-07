@@ -10,6 +10,8 @@ import com.jobs.domain.Volunteer;
 import com.jobs.persistence.EmployeeRepository;
 
 public class JobsController {	
+	
+	EmployeeRepository repository = new EmployeeRepository();
 
 	public JobsController(){
 		
@@ -18,7 +20,7 @@ public class JobsController {
 	public void createBossEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception{
 		try {
 			Employee boss = new Employee(name, address, phone,  salaryPerMonth, PaymentFactory.createPaymentRateBoss());
-			EmployeeRepository.addMember(boss);
+			repository.addMember(boss);
 		}catch (Exception e){
 			e.getStackTrace();
 		}
@@ -28,7 +30,7 @@ public class JobsController {
 	public void createEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception{	
 		try {
 			Employee employee = new Employee(name, address, phone,  salaryPerMonth, PaymentFactory.createPaymentRateEmployee());
-			EmployeeRepository.addMember(employee);
+			repository.addMember(employee);
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -38,7 +40,7 @@ public class JobsController {
 	public void createManagerEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception{
 		try {
 			Employee manager = new Employee(name, address, phone, salaryPerMonth, PaymentFactory.createPaymentRateManager());
-			EmployeeRepository.addMember(manager);	
+			repository.addMember(manager);	
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -51,7 +53,7 @@ public class JobsController {
 		double totalPaid;
 		double payslip=0;
 		
-		for (AbsStaffMember m:EmployeeRepository.getAllMembers()){
+		for (AbsStaffMember m:repository.getAllMembers()){
 			
 			m.pay();
 			
@@ -65,7 +67,7 @@ public class JobsController {
 		StringBuilder membersInList= new StringBuilder();
 		membersInList.append("\n");
 		
-		for(AbsStaffMember m:EmployeeRepository.getAllMembers()) {
+		for(AbsStaffMember m:repository.getAllMembers()) {
 			
 			membersInList.append(m.getId());
 			membersInList.append("\t");
